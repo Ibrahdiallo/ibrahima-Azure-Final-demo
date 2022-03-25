@@ -22,8 +22,15 @@ public class Controller {
     }
 
     @PostMapping
-    public void postUser(@RequestBody User user) {
-        userService.postUser(user);
+    public boolean postUser(@RequestBody User user) {
+
+        try {
+            userService.postUser(user);
+            return true;
+
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @GetMapping("/{Id}")

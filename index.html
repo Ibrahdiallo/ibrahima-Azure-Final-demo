@@ -1,31 +1,129 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Users</title>
-</head>
-<style>
-    .form-div{
-        margin:50px auto 50px;
-        padding: 25px 15px 10px 15px;
-        border: 4px solid #80ced7;
-        border-radius: 30px;
-        font-size:1.1em;
-        font-family: 'Merriweather&display=swap', serif;
-    }
-</style>
+<html>
+  <head>
+    <title>User</title>
+  </head>
+
+  <body>
+    <script>
+      var azureUrl =
+        'https://fullstack-demo-backend.azurewebsites.net/instruments/';
+      var localUrl = 'http://localhost:8080/users/';
+
+      var baseUrl = localUrl;
+
+      var user = {
+        id: 0,
+        firstName: '',
+        lastName: '',
+      };
+      var postingUser = {
+        myFirstName: '',
+        myLastName: '',
+      };
+
+      async function postInstrument() {
+        let postUrl = baseUrl;
+
+        postingUser.myFirstName =
+          document.getElementById('firstName').value;
+        postingUser.myLastName =
+          document.getElementById('lastName').value;
+
+        let response = await fetch(postUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+          },
+          body: JSON.stringify(postingUser),
+        });
+
+        try {
+          let json = await response.json();
+
+          if (json) {
+            alert('User added');
+          } else {
+            alert('User NOT added');
+          }
+        
+        } catch (error) {
+          console.log(error);
+          alert('Error: could not post user');
+        }
+      }
+
+      async function getInstrument() {
+        let getUrl = baseUrl;
+        let inputId = document.getElementById('Id').value;
+        getUrl += inputId;
+        console.log(getUrl);
+
+        let response = await fetch(getUrl);
+
+        try {
+          let json = await response.json();
+          console.log(json);
+
+          user.id = json.id;
+          user.firstName = json.firstName;
+          user.lastName = json.lastName;
+          console.log(user);
+
+          document.getElementById('resultId').innerHTML = user.id;
+          document.getElementById('resultFirstName').innerHTML =
+            user.firstName;
+          document.getElementById('resultlastName').innerHTML =
+            user.lastName;
+        } catch (error) {
+          alert('Error: could not find instrument');
+        }
+      }
+    </script>
+
+    <div class="block">
+      <h1>Users</h1>
+      <form>
+        <label for="firstName">First Name</label><br />
+        <input id="firstName" name="firstName" /></br>
+        <label for="lastName">Last Name</label><br />
+        <input id="lastName" name="lastName" /> </br>
+        <input
+          id="addButton"
+          name="addButton"
+          type="button"
+          onclick="postInstrument()"
+          value="Add"
+        />
+      </form>
+    </div>
+    <div class="block">
+      <h2>Get User By ID</h2>
+      <form>
+        <input id="Id" name="Id" />
+        <label for="Id">User ID</label>
+        <input
+          id="getButton"
+          type="button"
+          onclick="getInstrument()"
+          value="Get User"
+        />
+      </form>
+      <table>
+        <tr>
+          <th>User ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+        </tr>
+        <tr>
+          <td id="resultId"></td>
+          <td id="resultFirstName"></td>
+          <td id="resultlastName"></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
 
 
-<body>
-    <form action="https://fullstack-demo.azurewebsites.net/Users" method="post">
-        <div class = "form-group">
-            <label for = "myFisrtName">First Name</label>
-            <input type = "text" name = "myFisrtName" placeholder = "Enter First Name" class = "form-control form-control-lg">
-        </div>
-        <div class = "form-group">
-            <label for = "myLastName">Last Name</label>
-            <input type = "text" name = "myLastName" placeholder = "Enter Last Name" class = "form-control form-control-lg">
-        </div>
+
