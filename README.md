@@ -16,25 +16,25 @@ This is the final demo of Azure
 - Azure vs AWS services
 
 # Tuesday
-Azure Virtual Machines
-Creating a Linux Virtual Machine
-Security Groups
+- Azure Virtual Machines
+- Creating a Linux Virtual Machine
+- Security Groups
 
 # Wednesday
-Azure Storage
-BLOB storage
-Cloud SQL overview
+- Azure Storage
+- BLOB storage
+- Cloud SQL overview
 
 # Thursday
-DevOps
-Azure pipelines
+- DevOps
+- Azure pipelines
 
 # Friday
 - Review
-- 
+ 
 ## Topics
-Review of PaaS, IaaS, & SaaS
-Read an overview here Overview of IaaS, PaaS, and SaaS
+- Review of PaaS, IaaS, & SaaS
+- Read an overview here Overview of IaaS, PaaS, and SaaS
 
 ## Introduction to Azure
 - Overview of Azure
